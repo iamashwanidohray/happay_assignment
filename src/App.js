@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import './App.css';
 import 'h8k-components';
 import NavBar from './components/navbar';
-import ProductList from "./components/product-list";
-import Cart from "./components/cart";
+import ProductList from "./components/product-list/ProductList";
+// import Cart from "./components/cart";
+import OrderSummary from './components/order-summary/OrderSummary';
 
 const title = "Happay";
 
@@ -13,7 +14,7 @@ function App() {
             product.cartQuantity = 0;
             return product;
         });
-        const [cart,setCart] = useState({items: []});
+        const [cart,setCart] = useState({items: [{id: 1,id: 2}]});
         const [products, setProducts] = useState([...allproducts]);
 
     // componentDidMount() {
@@ -51,10 +52,9 @@ function App() {
       return (
           <div>
               <NavBar header={title}/>
-              <div>
-                  <ProductList products={products} />
-                  <Cart cart={cart}/>
-              </div>
+              <ProductList products={products} />
+                  {/* <Cart cart={cart}/> */}
+                  <OrderSummary ordered={cart}/>
           </div>
       );
 }

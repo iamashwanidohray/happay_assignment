@@ -1,49 +1,35 @@
 import React from 'react';
+import './ProductList.css';
 
-function ProductList() {
+function ProductList(props) {
+    console.log(props.products);
 
     return(
-        <ul class="cards">
-        <li class="cards__item">
-            <div class="card">
-            <div class="card__image card__image--fence"></div>
-            <div class="card__content">
-                <div class="card__title">Flex</div>
-                <p class="card__text">This is the shorthand for flex-grow, flex-shrink and flex-basis combined. The second and third parameters (flex-shrink and flex-basis) are optional. Default is 0 1 auto. </p>
-                <button class="btn btn--block card__btn">Button</button>
+        <div className="product-list">
+            <div className="product__title">
+                <h1>Most Popular</h1>
             </div>
-            </div>
-        </li>
-        <li class="cards__item">
-            <div class="card">
-            <div class="card__image card__image--river"></div>
-            <div class="card__content">
-                <div class="card__title">Flex Grow</div>
-                <p class="card__text">This defines the ability for a flex item to grow if necessary. It accepts a unitless value that serves as a proportion. It dictates what amount of the available space inside the flex container the item should take up.</p>
-                <button class="btn btn--block card__btn">Button</button>
-            </div>
-            </div>
-        </li>
-        <li class="cards__item">
-            <div class="card">
-            <div class="card__image card__image--record"></div>
-            <div class="card__content">
-                <div class="card__title">Flex Shrink</div>
-                <p class="card__text">This defines the ability for a flex item to shrink if necessary. Negative numbers are invalid.</p>
-                <button class="btn btn--block card__btn">Button</button>
-            </div>
-            </div>
-        </li>
-        <li class="cards__item">
-            <div class="card">
-            <div class="card__image card__image--flowers"></div>
-            <div class="card__content">
-                <div class="card__title">Flex Basis</div>
-                <p class="card__text">This defines the default size of an element before the remaining space is distributed. It can be a length (e.g. 20%, 5rem, etc.) or a keyword. The auto keyword means "look at my width or height property."</p>
-                <button class="btn btn--block card__btn">Button</button>
-            </div>
-            </div>
-        </li>
-        </ul>
+        
+            <ul className="cards">
+            {props.products.map((product, i) => {
+                    return(<li key={i} className="cards__item">
+                                <div className="card">
+                                <div className="card__image card__image--fence"><img src={product.img_url} alt="Card"/></div>
+                                <div className="card__content">
+                                    <div className="card__title">
+                                        {product.name} 
+                                        <div className="price__list">${product.final_price}</div>
+                                        {product.original_price ? <div className="price__list original__price">${product.original_price}</div> : ''}
+                                    </div>
+                                    <p className="card__text">{product.description}</p>
+                                    <button className="btn btn--block card__btn">Add To Cart</button>
+                                </div>
+                                </div>
+                            </li>);
+                })}
+            </ul>
+        </div>
     );
-}
+};
+
+export default ProductList;
